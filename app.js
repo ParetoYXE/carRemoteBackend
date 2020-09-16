@@ -27,8 +27,14 @@ app.get('/', function(req, res){
 	   res.send("Hello world!");
 	});
 
-	app.get('/car',function(req,res){
-		const cursor = db.collection('DASH').find().toArray()
-		res.send(cursor)
+app.get('/car',function(req,res){
+	MongoClient.connect(conString,{ useUnifiedTopology: true }).then(client =>{
+
+    const db = client.db('CAR')
+    const quotesCollection = db.collection('DASH')
+    res.send(cursor)
+
+
 	})
+})
 app.listen(3000);
