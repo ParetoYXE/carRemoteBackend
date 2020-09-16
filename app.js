@@ -16,7 +16,7 @@ MongoClient.connect(conString,{ useUnifiedTopology: true }).then(client =>{
 
     const db = client.db('CAR')
     const quotesCollection = db.collection('DASH')
-
+    console.log('test')
 
 
 })
@@ -28,13 +28,7 @@ app.get('/', function(req, res){
 	});
 
 app.get('/car',function(req,res){
-	MongoClient.connect(conString,{ useUnifiedTopology: true }).then(client =>{
-
-    const db = client.db('CAR')
-    const quotesCollection = db.collection('DASH')
-    res.send(cursor)
-
-
-	})
+	
+	res.send("Car data requested.")
 })
 app.listen(3000);
