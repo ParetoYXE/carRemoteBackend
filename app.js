@@ -28,6 +28,7 @@ app.get('/', function(req, res){
 	});
 
 	app.get('/car',function(req,res){
-		res.send("Car data requested.")
+		const cursor = db.collection('DASH').find().toArray()
+		res.send(cursor)
 	})
 app.listen(3000);
