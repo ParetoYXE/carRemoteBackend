@@ -18,16 +18,17 @@ MongoClient.connect(conString,{ useUnifiedTopology: true }).then(client =>{
     const quotesCollection = db.collection('DASH')
 
 
-	app.get('/', function(req, res){
-		   res.send("Hello world!");
-		});
-
-	app.get('/car',function(req,res){
-		
-		res.send("Car data requested.")
-	})
+})
 
 
+
+
+app.get('/', function(req, res){
+	res.send("Hello world!");
+});
+
+app.get('/car',function(req,res){
+	res.send("Car data requested.")
 })
 
 
