@@ -33,7 +33,7 @@ MongoClient.connect(conString,{ useUnifiedTopology: true }).then(client =>{
 
 
     //Writes to DB everytime the form is updated
-    app.post('/car', (req, res) => {
+    app.post('http://138.197.149.50:3000/car', (req, res) => {
 	  quotesCollection.insertOne(req.body)
 	    .then(result => {
 	      res.redirect('/')
@@ -42,7 +42,7 @@ MongoClient.connect(conString,{ useUnifiedTopology: true }).then(client =>{
 	})
 
     //Loads index and on refresh reads from the DB
-	app.get('/', (req, res) => {
+	app.get('http://138.197.149.50:3000/', (req, res) => {
 		res.sendFile(__dirname + '/index.html')
 		const cursor = db.collection('DASH').find().toArray()
 		.then(results =>{
@@ -52,7 +52,7 @@ MongoClient.connect(conString,{ useUnifiedTopology: true }).then(client =>{
 
 
 	//When the Server recieves data it writes to the db
-	app.put('/car',(req,res)=>{
+	app.put('http://138.197.149.50:3000/car',(req,res)=>{
 		quotesCollection.insertOne(req.body)
 		res.sendFile(__dirname + '/index.html')
 		const cursor = db.collection('DASH').find().toArray()
