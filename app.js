@@ -11,9 +11,10 @@ conString = "mongodb+srv://admin:evolvo@cluster0.kzsnt.mongodb.net/carData?retry
 app.use(bodyParser.urlencoded({extended : true}))
 app.use(bodyParser.json())
 
-data = ""
+data = "Test Data"
+
 MongoClient.connect(conString,{ useUnifiedTopology: true }).then(client =>{
-	data = "test"
+	data = "MongoDB Connected"
 
 
 
