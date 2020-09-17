@@ -1,34 +1,34 @@
-var express = require('express');
-const bodyParser = require('body-parser')
-var app = express();
+const dbName = "Name";
 
+const uri = "mongodb+srv://admin:evolvo@cluster0.kzsnt.mongodb.net/carData?retryWrites=true&w=majority";
 
-const MongoClient = require('mongodb').MongoClient
+MongoClient.connect(
+  uri,
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  (err, client) => {
+    if (err) {
+      console.log(err);
+      throw err;
+    }
 
+    console.log("Connected successfully to Mongodb");
 
-conString = "mongodb+srv://admin:evolvo@cluster0.kzsnt.mongodb.net/carData?retryWrites=true&w=majority"
+    const db = client.db(dbName);
 
-app.use(bodyParser.urlencoded({extended : true}))
-app.use(bodyParser.json())
+    app.locals.db = db;
 
+    const port = process.env.PORT || 3000;
+    app.listen(port, () => console.log(`Listening on port ${port}...`));
+  }
+);
 
-MongoClient.connect(conString,{ useUnifiedTopology: true }).then(client =>{
+app.get("/test", async (req, res) => {
+  const db = req.app.locals.db;
 
-    const db = client.db('CAR')
-    const quotesCollection = db.collection('DASH')
+  const users = await db
+    .collection("DASH")
+    .find({})
+    .toArray();
 
-    quotesCollection.insertOne({"name":"test","quote":"Written from load"})
-
-	})
-
-
-
-app.get('/', function(req, res){
-   res.send("Hello world!");
+  res.send(users);
 });
-
-app.get('/car',function(req,res){
-	res.send("Car data requested.")
-})
-
-app.listen(3000);
