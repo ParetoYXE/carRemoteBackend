@@ -3,32 +3,30 @@ const bodyParser = require('body-parser')
 var app = express();
 
 
+const MongoClient = require('mongodb').MongoClient
 
 
-//Set up mongoose connection
-var mongoose = require('mongoose');
-var mongoDB = 'mongodb+srv://admin:evolvo@cluster0.kzsnt.mongodb.net/carData?retryWrites=true&w=majority';
-mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-
-
+conString = "mongodb+srv://admin:evolvo@cluster0.kzsnt.mongodb.net/carData?retryWrites=true&w=majority"
 
 app.use(bodyParser.urlencoded({extended : true}))
 app.use(bodyParser.json())
 
 
+MongoClient.connect(conString,{ useUnifiedTopology: true }).then(client =>{
+
+    const db = client.db('CAR')
+    const quotesCollection = db.collection('DASH')
+
+})
+
 
 
 app.get('/', function(req, res){
-	   res.send("test");
-	});
+   res.send("Hello world!");
+});
 
 app.get('/car',function(req,res){
-	
 	res.send("Car data requested.")
 })
+
 app.listen(3000);
-
-
