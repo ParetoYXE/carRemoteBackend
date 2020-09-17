@@ -39,6 +39,7 @@ function testFunction(){
     const cursor = db.collection('DASH').find().toArray()
 		.then(results =>{
 			data = results
+			return data
 		}).catch(error => console.error(error))
 
 
@@ -48,8 +49,5 @@ function testFunction(){
 
 	})
 
-
-
-	return data
 
 }
