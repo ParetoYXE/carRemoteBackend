@@ -8,7 +8,8 @@ const bodyParser = require('body-parser')
 const app = express()
 const port = 3000
 const MongoClient = require('mongodb').MongoClient
-
+var db;
+var quotesCollection;
 
 //Database connection string
 
@@ -22,8 +23,8 @@ app.use(bodyParser.json())
 //Load and QueryDataBase
 MongoClient.connect(conString,{ useUnifiedTopology: true }).then(client =>{
 
-    const db = client.db('CAR')
-    const quotesCollection = db.collection('DASH')
+    db = client.db('CAR')
+    quotesCollection = db.collection('DASH')
 
     //Load Initial Database
     const cursor = db.collection('DASH').find().toArray()
