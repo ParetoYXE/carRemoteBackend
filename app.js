@@ -15,8 +15,8 @@ app.use(bodyParser.json())
 
 
 app.get('/', function(req, res){
-	   testFunction()
-	   res.send("Hello world!");
+	   response = testFunction()
+	   res.send(response);
 	});
 
 app.get('/car',function(req,res){
@@ -30,5 +30,5 @@ app.listen(3000);
 
 
 function testFunction(){
-	console.log("test")
+	return "test"
 }
