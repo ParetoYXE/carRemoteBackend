@@ -48,7 +48,6 @@ app.post('/car', (req, res) => {
 //Loads index and on refresh reads from the DB
 app.get('/', (req, res) => {
 	res.sendFile(__dirname + '/index.html'
-		const cursor = db.collection('DASH').find().toArray()
 		.then(results =>{
 			console.log(results)
 		}).catch(error => console.error(error))
