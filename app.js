@@ -17,17 +17,16 @@ MongoClient.connect(conString,{ useUnifiedTopology: true }).then(client =>{
 	data = "MongoDB Connected"
 
 
-
-})
-
-
-
-app.get('/', function(req, res){
+	app.get('/', function(req, res){
 	   res.send(data);
 	});
 
-app.get('/car',function(req,res){
-	
-	res.send("Car data requested.")
+	app.get('/car',function(req,res){
+		
+		res.send("Car data requested.")
+	})
+
+
 })
+
 app.listen(3000);
