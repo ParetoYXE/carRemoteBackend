@@ -30,7 +30,7 @@ app.listen(3000);
 
 
 function testFunction(){
-    MongoClient.connect(conString,{ useUnifiedTopology: true }).then(client =>{
+	MongoClient.connect(conString,{ useUnifiedTopology: true }).then(client =>{
 
     const db = client.db('CAR')
     const quotesCollection = db.collection('DASH')
@@ -40,7 +40,16 @@ function testFunction(){
 		.then(results =>{
 			data = results
 		}).catch(error => console.error(error))
+
+
+
+
     
-   })
- return "test"
+
+	})
+
+
+
+	return data
+
 }
