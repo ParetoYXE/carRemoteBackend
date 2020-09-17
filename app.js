@@ -43,7 +43,7 @@ function testFunction(){
 
 
 
-		return data
+		return "test"
 
 
     
