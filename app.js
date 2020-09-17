@@ -11,14 +11,14 @@ conString = "mongodb+srv://admin:evolvo@cluster0.kzsnt.mongodb.net/carData?retry
 app.use(bodyParser.urlencoded({extended : true}))
 app.use(bodyParser.json())
 
-
+data = ""
 MongoClient.connect(conString,{ useUnifiedTopology: true }).then(client =>{
 
     const db = client.db('CAR')
-
+    console.log("test")
     db.collection('DASH').find().toArray(function (err, result) {
+    console.log("test")
     if (err) throw err
-
     console.log(result)
   })
 
