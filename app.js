@@ -8,7 +8,8 @@ const bodyParser = require('body-parser')
 const app = express()
 const port = 3000
 const MongoClient = require('mongodb').MongoClient
-
+var db;
+var quotesCollection;
 
 //Database connection string
 
@@ -22,8 +23,8 @@ app.use(bodyParser.json())
 //Load and QueryDataBase
 MongoClient.connect(conString,{ useUnifiedTopology: true }).then(client =>{
 
-    const db = client.db('CAR')
-    const quotesCollection = db.collection('DASH')
+    db = client.db('CAR')
+    quotesCollection = db.collection('DASH')
 
     //Load Initial Database
     const cursor = db.collection('DASH').find().toArray()
@@ -41,7 +42,13 @@ MongoClient.connect(conString,{ useUnifiedTopology: true }).then(client =>{
 	    .catch(error => console.error(error))
 	})
 
-    //Loads index and on refresh reads from the DB
+
+	})
+
+
+
+
+ //Loads index and on refresh reads from the DB
 	app.get('/', (req, res) => {
 		res.sendFile(__dirname + '/index.html')
 		const cursor = db.collection('DASH').find().toArray()
@@ -53,6 +60,7 @@ MongoClient.connect(conString,{ useUnifiedTopology: true }).then(client =>{
 
 	//When the Server recieves data it writes to the db
 	app.put('/car',(req,res)=>{
+		console.log('test')
 		quotesCollection.insertOne(req.body)
 		res.sendFile(__dirname + '/index.html')
 		const cursor = db.collection('DASH').find().toArray()
@@ -61,15 +69,11 @@ MongoClient.connect(conString,{ useUnifiedTopology: true }).then(client =>{
 		}).catch(error => console.error(error))
 	})
 
+
+	//Tell Server to begin listening on PORT 3000
+	app.listen(port, () => {
+	  console.log(`Example app listening at http://localhost:${port}`)
 	})
 
 
-
-
-//Tell Server to begin listening on PORT 3000
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
-
-
-app.use(express.static('public'))
+	app.use(express.static('public'))
