@@ -22,13 +22,7 @@ app.use(bodyParser.json())
 
 
 app.get('/', function(req, res){
-		db.collection('DASH').find().toArray(function (err, result) {
-	    if (err) throw err
-
-	    console.log(result)
-	  	
-	  })
-		res.send("test");
+	   res.send("test");
 	});
 
 app.get('/car',function(req,res){
