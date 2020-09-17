@@ -13,14 +13,7 @@ app.use(bodyParser.json())
 
 data = ""
 MongoClient.connect(conString,{ useUnifiedTopology: true }).then(client =>{
-
-    const db = client.db('CAR')
-    console.log("test")
-    db.collection('DASH').find().toArray(function (err, result) {
-    console.log("test")
-    if (err) throw err
-    console.log(result)
-  })
+	data = "test"
 
 
 
@@ -29,7 +22,7 @@ MongoClient.connect(conString,{ useUnifiedTopology: true }).then(client =>{
 
 
 app.get('/', function(req, res){
-	   res.send("Hello world!");
+	   res.send(data);
 	});
 
 app.get('/car',function(req,res){
