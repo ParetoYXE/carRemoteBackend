@@ -41,14 +41,7 @@ MongoClient.connect(conString,{ useUnifiedTopology: true }).then(client =>{
 	    })
 	    .catch(error => console.error(error))
 	})
-
-
-	})
-
-
-
-
- //Loads index and on refresh reads from the DB
+	//Loads index and on refresh reads from the DB
 	app.get('/', (req, res) => {
 		res.sendFile(__dirname + '/index.html')
 		const cursor = db.collection('DASH').find().toArray()
@@ -74,4 +67,7 @@ MongoClient.connect(conString,{ useUnifiedTopology: true }).then(client =>{
 	app.listen(port, () => {
 	  console.log(`Example app listening at http://localhost:${port}`)
 	})
+
+	})
+
 
