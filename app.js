@@ -18,24 +18,17 @@ MongoClient.connect(conString,{ useUnifiedTopology: true }).then(client =>{
     const quotesCollection = db.collection('DASH')
 
 
-})
 
+})
 
 
 
 app.get('/', function(req, res){
-	res.send("Hello world!");
-});
+	   res.send("Hello world!");
+	});
 
 app.get('/car',function(req,res){
+	
 	res.send("Car data requested.")
 })
-
-
-//Tell Server to begin listening on PORT 3000
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
-
-
-app.use(express.static('public'))
+app.listen(3000);
