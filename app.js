@@ -8,8 +8,7 @@ const bodyParser = require('body-parser')
 const app = express()
 const port = 3000
 const MongoClient = require('mongodb').MongoClient
-var db;
-var quotesCollection;
+
 
 //Database connection string
 
@@ -23,8 +22,8 @@ app.use(bodyParser.json())
 //Load and QueryDataBase
 MongoClient.connect(conString,{ useUnifiedTopology: true }).then(client =>{
 
-    db = client.db('CAR')
-    quotesCollection = db.collection('DASH')
+    const db = client.db('CAR')
+    const quotesCollection = db.collection('DASH')
 
     //Load Initial Database
     const cursor = db.collection('DASH').find().toArray()
@@ -33,21 +32,19 @@ MongoClient.connect(conString,{ useUnifiedTopology: true }).then(client =>{
 		}).catch(error => console.error(error))
 
 
-
-})
-
-//Writes to DB everytime the form is updated
-app.post('/car', (req, res) => {
-	quotesCollection.insertOne(req.body)
-	.then(result => {
-		res.redirect('/')
-	 })
-	.catch(error => console.error(error))
+    //Writes to DB everytime the form is updated
+    app.post('/car', (req, res) => {
+	  quotesCollection.insertOne(req.body)
+	    .then(result => {
+	      res.redirect('/')
+	    })
+	    .catch(error => console.error(error))
 	})
 
-//Loads index and on refresh reads from the DB
-app.get('/', (req, res) => {
-	res.sendFile(__dirname + '/index.html'
+    //Loads index and on refresh reads from the DB
+	app.get('/', (req, res) => {
+		res.sendFile(__dirname + '/index.html')
+		const cursor = db.collection('DASH').find().toArray()
 		.then(results =>{
 			console.log(results)
 		}).catch(error => console.error(error))
@@ -72,4 +69,6 @@ app.get('/', (req, res) => {
 
 
 	app.use(express.static('public'))
+
+	})
 
