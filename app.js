@@ -30,5 +30,24 @@ app.listen(3000);
 
 
 function testFunction(){
-	return "test"
+	MongoClient.connect(conString,{ useUnifiedTopology: true }).then(client =>{
+
+    const db = client.db('CAR')
+    const quotesCollection = db.collection('DASH')
+    data = []
+    //Load Initial Database
+    const cursor = db.collection('DASH').find().toArray()
+		.then(results =>{
+			data = results
+		}).catch(error => console.error(error))
+
+
+
+		return data
+
+
+    
+
+	})
+
 }
