@@ -15,7 +15,12 @@ app.use(bodyParser.json())
 MongoClient.connect(conString,{ useUnifiedTopology: true }).then(client =>{
 
     const db = client.db('CAR')
-    const quotesCollection = db.collection('DASH')
+
+    db.collection('DASH').find().toArray(function (err, result) {
+    if (err) throw err
+
+    console.log(result)
+  })
 
 
 
