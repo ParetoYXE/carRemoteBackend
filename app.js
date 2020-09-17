@@ -75,5 +75,3 @@ MongoClient.connect(conString,{ useUnifiedTopology: true }).then(client =>{
 	  console.log(`Example app listening at http://localhost:${port}`)
 	})
 
-
-	app.use(express.static('public'))
