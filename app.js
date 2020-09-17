@@ -34,7 +34,7 @@ function testFunction(){
 
     const db = client.db('CAR')
     const quotesCollection = db.collection('DASH')
-    data = []
+    const data = []
     //Load Initial Database
     const cursor = db.collection('DASH').find().toArray()
 		.then(results =>{
